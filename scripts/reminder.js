@@ -29,7 +29,9 @@ async function getAuthToken() {
 }
 
 async function getUnverifiedUsers(token) {
-  const query = "email_verified:false AND created_at:[* TO NOW-1DAY]";
+  const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+  const query = `email_verified:false AND created_at:[* TO "${oneDayAgo}"]`;
+
   const res = await axios.get(`${AUTH0_AUDIENCE}users`, {
     headers: { Authorization: `Bearer ${token}` },
     params: {
@@ -38,6 +40,7 @@ async function getUnverifiedUsers(token) {
       per_page: 100,
     },
   });
+
   return res.data;
 }
 
