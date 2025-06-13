@@ -2,7 +2,7 @@ name: Auth0 Email Reminder
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # ⏱️ Every 5 minutes
+    - cron: '0 8 * * *'  # ⏱️ Every day
   workflow_dispatch:       # Allows manual trigger too
 
 jobs:
